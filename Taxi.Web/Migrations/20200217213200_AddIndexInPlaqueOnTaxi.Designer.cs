@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taxi.Web.Data;
+using Taxi.Web.Helpers;
 
 namespace Taxi.Web.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(IConverterHelper))]
     [Migration("20200217213200_AddIndexInPlaqueOnTaxi")]
     partial class AddIndexInPlaqueOnTaxi
     {

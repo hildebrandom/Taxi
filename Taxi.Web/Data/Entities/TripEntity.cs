@@ -6,6 +6,8 @@ namespace Taxi.Web.Data.Entities
 {
     public class TripEntity
     {
+        internal UserEntity User;
+
         public int Id { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -55,6 +57,7 @@ namespace Taxi.Web.Data.Entities
 
         public TaxiEntity Taxi { get; set; }
         public ICollection<TripDetailEntity> TripDetails { get; set; }
+
 
     }
 }
