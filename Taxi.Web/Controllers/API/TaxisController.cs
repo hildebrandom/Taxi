@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
@@ -37,15 +35,16 @@ namespace Taxi.Web.Controllers.API
                .Include(t => t.Trips)
                .ThenInclude(t => t.TripDetails)
                .Include(t => t.Trips)
-               .ThenInclude(t => t.User) 
+               .ThenInclude(t => t.User)
                .FirstOrDefaultAsync(t => t.Plaque == plaque);
 
 
 
             if (taxiEntity == null)
             {
-                return NotFound();
-
+                taxiEntity = new TaxiEntity { Plaque = plaque.ToUpper() };
+                _context.Taxis.Add(taxiEntity);
+                await _context.SaveChangesAsync();
             }
 
             return Ok(_converterHelper.ToTaxiResponse(taxiEntity));
